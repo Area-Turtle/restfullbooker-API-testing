@@ -145,12 +145,9 @@
               }
             },
             "url": {
-              "raw": "https://restful-booker.herokuapp.com/auth",
-              "protocol": "https",
+              "raw": "{{baseUrl}}/auth",
               "host": [
-                "restful-booker",
-                "herokuapp",
-                "com"
+                "{{baseUrl}}"
               ],
               "path": [
                 "auth"
