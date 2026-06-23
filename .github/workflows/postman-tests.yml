@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Postman Collection
         run: |
-          newman run "postman/Restful-Booker-API Testing.postman_collection.json" \
+          newman run "postman/Restful-Booker-API_Testing.postman_collection.json" \
             -e "postman/Restful-Booker-Testing.postman_environment.json" \
             --reporters cli,junit \
             --reporter-junit-export results.xml
