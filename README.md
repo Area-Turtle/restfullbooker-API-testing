@@ -149,5 +149,5 @@ This project demonstrates:
 
 A free API playground created for learning and practicing API testing techniques.
 
-🔗 https://restful-booker.herokuapp.com/
+https://restful-booker.herokuapp.com/
 
