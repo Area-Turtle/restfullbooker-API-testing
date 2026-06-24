@@ -1,20 +1,37 @@
-# 🚀 Restful Booker API Testing
+# Restful Booker API Testing
 
 API test automation project built using **Postman** and **Newman** to validate the functionality, reliability, and behavior of the Restful Booker API.
 
 ---
 
-## 📖 Overview
+## Table of Contents
+
+* [Overview](#-overview)
+* [Technologies Used](#️-technologies-used)
+* [API Endpoints Covered](#-api-endpoints-covered)
+
+  * [Health Check](#️-health-check)
+  * [Authentication](#-authentication)
+  * [Booking Management](#-booking-management)
+* [Test Coverage](#-test-coverage)
+* [CI/CD](#-cicd)
+* [Learning Objectives](#-learning-objectives)
+* [Project Highlights](#-project-highlights)
+* [Reference](#-reference)
+
+---
+
+## Overview
 
 This project contains a collection of automated API tests for the **Restful Booker** application, a REST API playground designed for learning and practicing API testing.
 
 The test suite validates common CRUD operations, authentication, response validation, and error handling scenarios. Restful Booker is intentionally designed as a learning platform for API testing and resets its data periodically.
 
-🔗 **Repository:** https://github.com/Area-Turtle/restfullbooker-API-testing
+**Repository:** https://github.com/Area-Turtle/restfullbooker-API-testing
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 | Technology     | Purpose                       |
 | -------------- | ----------------------------- |
@@ -26,21 +43,21 @@ The test suite validates common CRUD operations, authentication, response valida
 
 ---
 
-## 🎯 API Endpoints Covered
+## API Endpoints Covered
 
-### ❤️ Health Check
+### Health Check
 
 | Method | Endpoint |
 | ------ | -------- |
 | GET    | `/ping`  |
 
-### 🔐 Authentication
+### Authentication
 
 | Method | Endpoint |
 | ------ | -------- |
 | POST   | `/auth`  |
 
-### 📚 Booking Management
+### Booking Management
 
 | Method | Endpoint        |
 | ------ | --------------- |
@@ -53,7 +70,7 @@ The test suite validates common CRUD operations, authentication, response valida
 
 ---
 
-## ✅ Test Coverage
+## Test Coverage
 
 The collection includes validation for:
 
@@ -71,17 +88,17 @@ The collection includes validation for:
 
 ### Validation Areas
 
-* ✔️ Functional Testing
-* ✔️ CRUD Operations
-* ✔️ Authentication Testing
-* ✔️ Response Validation
-* ✔️ Error Handling
-* ✔️ Environment Variable Usage
-* ✔️ Automated Regression Testing
+* Functional Testing
+* CRUD Operations
+* Authentication Testing
+* Response Validation
+* Error Handling
+* Environment Variable Usage
+* Automated Regression Testing
 
 ---
 
-## 🔄 CI/CD
+## CI/CD
 
 GitHub Actions is configured to automatically execute the Postman collection on:
 
@@ -98,7 +115,7 @@ GitHub Actions is configured to automatically execute the Postman collection on:
 
 ---
 
-## 🎓 Learning Objectives
+## Learning Objectives
 
 This project demonstrates:
 
@@ -111,7 +128,7 @@ This project demonstrates:
 
 ---
 
-## 📊 Project Highlights
+## Project Highlights
 
 > **Goal:** Build a maintainable API automation framework using Postman and Newman while integrating automated execution through GitHub Actions.
 
@@ -126,10 +143,11 @@ This project demonstrates:
 
 ---
 
-## 🌐 Reference
+## Reference
 
 **Restful Booker**
 
 A free API playground created for learning and practicing API testing techniques.
 
-Website: https://restful-booker.herokuapp.com/
+🔗 https://restful-booker.herokuapp.com/
+
