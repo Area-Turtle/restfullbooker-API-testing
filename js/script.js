@@ -1,8 +1,9 @@
 document.getElementById("btn").addEventListener("click", () => {
+    console.log("button is clicked loaded");
     alert("Button clicked!");
 });
 
-
+console.log("script.js loaded");
 
 async function createBooking() {
     const response = await fetch(`${BASE_URL}/booking`, {
@@ -28,12 +29,12 @@ async function createBooking() {
     console.log(data);
 }
 
-async function getBooking(id) {
-    const response = await fetch(`${BASE_URL}/booking/${id}`);
-    const booking = await response.json();
+// async function getBooking(id) {
+//     const response = await fetch(`${BASE_URL}/booking/${id}`);
+//     const booking = await response.json();
 
-    console.log(booking);
-}
+//     console.log(booking);
+// }
 const BASE_URL = "https://restful-booker.herokuapp.com";
 
 async function getBooking(id) {
