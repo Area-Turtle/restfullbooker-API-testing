@@ -44,7 +44,7 @@ document.getElementById("loadBookings").addEventListener("click", () => {
 //         const bookings = await response.json();
 
 //         console.log(bookings);
-//     } catch (error) {
+//     } catch (error) {s
 //         console.error(error);
 //     }
 // }
