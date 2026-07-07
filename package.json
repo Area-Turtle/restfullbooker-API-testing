@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Area-Turtle/restfullbooker-API-testing#readme",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^5.2.1"
   }
 }

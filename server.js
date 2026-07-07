@@ -1,7 +1,10 @@
 const express = require("express");
+require("dotenv").config();
 
 const app = express();
-const PORT = 3000;
+
+const PORT = process.env.PORT;
+const SERVER_API_URL = process.env.SERVER_API_URL;
 
 // Serve your frontend files
 app.use(express.static(__dirname));
@@ -10,7 +13,7 @@ app.use(express.static(__dirname));
 app.get("/api/booking/:id", async (req, res) => {
     try {
         const response = await fetch(
-            `https://restful-booker.herokuapp.com/booking/${req.params.id}`
+            `${SERVER_API_URL}/booking/${req.params.id}`
         );
 
         const booking = await response.json();

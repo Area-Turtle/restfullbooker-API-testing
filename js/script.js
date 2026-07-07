@@ -35,7 +35,7 @@ async function createBooking() {
 
 //     console.log(booking);
 // }
-const BASE_URL = "https://restful-booker.herokuapp.com";
+const BASE_URL = "http://localhost:3000/api";
 
 async function getBooking(id) {
     try {
