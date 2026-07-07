@@ -1,0 +1,21 @@
+{
+  "name": "restfullbooker-api-testing",
+  "version": "1.0.0",
+  "description": "API test automation project built using **Postman** and **Newman** to validate the functionality, reliability, and behavior of the Restful Booker API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Area-Turtle/restfullbooker-API-testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Area-Turtle/restfullbooker-API-testing/issues"
+  },
+  "homepage": "https://github.com/Area-Turtle/restfullbooker-API-testing#readme"
+}
