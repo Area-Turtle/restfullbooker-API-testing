@@ -3,7 +3,11 @@ document.getElementById("btn").addEventListener("click", () => {
     alert("Button clicked!");
 });
 
+
 console.log("script.js loaded");
+// require("dotenv").config();
+// console.log(process.env.PORT)
+// console.log(process.env.SERVER_API_URL)
 
 async function createBooking() {
     const response = await fetch(`${BASE_URL}/booking`, {
@@ -29,12 +33,6 @@ async function createBooking() {
     console.log(data);
 }
 
-// async function getBooking(id) {
-//     const response = await fetch(`${BASE_URL}/booking/${id}`);
-//     const booking = await response.json();
-
-//     console.log(booking);
-// }
 const BASE_URL = "http://localhost:3000/api";
 
 async function getBooking(id) {
@@ -64,28 +62,43 @@ async function getBooking(id) {
             "Failed to load booking.";
     }
 }
-
 // When the button is clicked, load booking #1
 document.getElementById("loadBookings").addEventListener("click", () => {
-    console.log("Button clicked");
-    getBooking(1);
+    console.log("Button loadBookings clicked");
+    const bookingId = document.getElementById("bookingId").value;
+
+    if (!bookingId) {
+        alert("Please enter a booking ID");
+        return;
+    }
+
+    getBooking(bookingId);
 });
 
-// async function getBookings() {
-//     try {
-//         const response = await fetch(`${BASE_URL}/booking`);
+async function getAllBookings() {
+    try {
+        const response = await fetch(`${BASE_URL}/booking`);
 
-//         if (!response.ok) {
-//             throw new Error(`HTTP ${response.status}`);
-//         }
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
 
-//         const bookings = await response.json();
+        const bookings = await response.json();
 
-//         console.log(bookings);
-//     } catch (error) {s
-//         console.error(error);
-//     }
-// }
+        console.log(bookings);
+        document.getElementById("allBookings").innerHTML =
+            bookings.map(b => `<p>${b.bookingid}</p>`).join("");
+    } catch (error) {
+        console.error(error);
+        document.getElementById("allBookingListResult").textContent =
+            "Failed to load booking.";
+    }
+}
+
+document.getElementById("allBookings").addEventListener("click", () => {
+    console.log("Button clicked");
+    getAllBookings();
+});
 
 // document.getElementById("loadBookings").addEventListener("click", getBookings);
 //createBooking();
