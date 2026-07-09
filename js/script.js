@@ -9,29 +9,29 @@ console.log("script.js loaded");
 // console.log(process.env.PORT)
 // console.log(process.env.SERVER_API_URL)
 
-async function createBooking() {
-    const response = await fetch(`${BASE_URL}/booking`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            firstname: "John",
-            lastname: "Doe",
-            totalprice: 150,
-            depositpaid: true,
-            bookingdates: {
-                checkin: "2026-07-01",
-                checkout: "2026-07-05"
-            },
-            additionalneeds: "Breakfast"
-        })
-    });
+// async function createBooking() {
+//     const response = await fetch(`${BASE_URL}/booking`, {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             firstname: "John",
+//             lastname: "Doe",
+//             totalprice: 150,
+//             depositpaid: true,
+//             bookingdates: {
+//                 checkin: "2026-07-01",
+//                 checkout: "2026-07-05"
+//             },
+//             additionalneeds: "Breakfast"
+//         })
+//     });
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    console.log(data);
-}
+//     console.log(data);
+// }
 
 const BASE_URL = "http://localhost:3000/api";
 
@@ -103,3 +103,46 @@ document.getElementById("allBookings").addEventListener("click", () => {
 // document.getElementById("loadBookings").addEventListener("click", getBookings);
 //createBooking();
 //getBooking(1);
+
+async function createBooking() {
+    const booking = {
+        firstname: "John",
+        lastname: "Doe",
+        totalprice: 150,
+        depositpaid: true,
+        bookingdates: {
+            checkin: "2026-07-01",
+            checkout: "2026-07-05"
+        },
+        additionalneeds: "Breakfast"
+    };
+
+    const response = await fetch("http://localhost:3000/api/booking", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(booking)
+    });
+
+    const result = await response.json();
+
+    console.log(result);
+}
+
+async function authenticate() {
+    const response = await fetch("http://localhost:3000/api/auth", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: "admin",
+            password: "password123"
+        })
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+}
