@@ -127,6 +127,10 @@ async function createBooking() {
 
     const result = await response.json();
 
+    // Save the created booking ID
+    bookingId = result.bookingid;
+
+    console.log("Created Booking ID:", bookingId);
     console.log(result);
 }
 
@@ -146,3 +150,17 @@ async function authenticate() {
 
     console.log(data);
 }
+
+async function getCreatedBooking() {
+    const response = await fetch(
+        `http://localhost:3000/api/booking/${bookingId}`
+    );
+
+    const booking = await response.json();
+
+    console.log(booking);
+}
+
+await createBooking();
+await getCreatedBooking();
+
