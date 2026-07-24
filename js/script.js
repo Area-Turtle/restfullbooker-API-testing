@@ -161,6 +161,54 @@ async function getCreatedBooking() {
     console.log(booking);
 }
 
+let bookingId;
+let authToken;
+
+// async function getEditBooking() {
+//     if (!bookingId) {
+//         console.error("No booking ID available.");
+//         return;
+//     }
+
+//     if (!authToken) {
+//         console.error("No authentication token available.");
+//         return;
+//     }
+
+//     const updatedBooking = {
+//         firstname: "Jane",
+//         lastname: "Smith",
+//         totalprice: 200,
+//         depositpaid: false,
+//         bookingdates: {
+//             checkin: "2026-08-01",
+//             checkout: "2026-08-05"
+//         },
+//         additionalneeds: "Lunch"
+//     };
+
+//     const response = await fetch(
+//         `http://localhost:3000/api/booking/${bookingId}`,
+//         {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Cookie": `token=${authToken}`
+//             },
+//             body: JSON.stringify(updatedBooking)
+//         }
+//     );
+
+//     if (!response.ok) {
+//         throw new Error(`HTTP ${response.status}`);
+//     }
+
+//     const result = await response.json();
+
+//     console.log("Updated Booking:");
+//     console.log(result);
+// }
+
 await createBooking();
 await getCreatedBooking();
 
