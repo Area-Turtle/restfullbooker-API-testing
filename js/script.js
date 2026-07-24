@@ -134,35 +134,122 @@ async function createBooking() {
     console.log(result);
 }
 
-async function authenticate() {
-    const response = await fetch("http://localhost:3000/api/auth", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            username: "admin",
-            password: "password123"
-        })
-    });
+// async function authenticate() {
+//     const response = await fetch("http://localhost:3000/api/auth", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             username: "admin",
+//             password: "password123"
+//         })
+//     });
+
+//     const data = await response.json();
+
+//     console.log(data);
+// }
+
+const form = document.getElementById("login-form");
+const submitBtn = document.getElementById("submit-btn");
+const messageEl = document.getElementById("message");
+
+async function authenticate(username, password) {
+
+    const response = await fetch(
+        "http://localhost:3000/api/auth",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                username,
+                password
+            })
+        }
+    );
+
 
     const data = await response.json();
 
-    console.log(data);
+
+    if(!response.ok || data.reason){
+
+        throw new Error(
+            data.reason || 
+            "Invalid username or password."
+        );
+
+    }
+
+
+    return data;
 }
 
-async function getCreatedBooking() {
-    const response = await fetch(
-        `http://localhost:3000/api/booking/${bookingId}`
-    );
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-    const booking = await response.json();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
 
-    console.log(booking);
-}
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Signing in…";
+    messageEl.textContent = "";
+    messageEl.className = "message";
 
-let bookingId;
-let authToken;
+    try {
+        const data = await authenticate(username, password);
+
+        if (data.token) {
+
+            messageEl.textContent =
+                "Signed in successfully.";
+
+            messageEl.className =
+                "message success";
+
+
+            localStorage.setItem(
+                "token",
+                data.token
+            );
+
+        } else {
+
+            messageEl.textContent =
+                "Invalid username or password.";
+
+            messageEl.className =
+                "message error";
+
+        }
+
+
+        console.log(data);
+        // e.g. store a token: if (data.token) localStorage.setItem("token", data.token);
+    } catch (err) {
+        messageEl.textContent = err.message || "Something went wrong. Please try again.";
+        messageEl.className = "message error";
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Sign in";
+    }
+});
+
+// async function getCreatedBooking() {
+//     const response = await fetch(
+//         `http://localhost:3000/api/booking/${bookingId}`
+//     );
+
+//     const booking = await response.json();
+
+//     console.log(booking);
+// }
+
+// let bookingId;
+// let authToken;
 
 // async function getEditBooking() {
 //     if (!bookingId) {
@@ -209,6 +296,6 @@ let authToken;
 //     console.log(result);
 // }
 
-await createBooking();
-await getCreatedBooking();
+// await createBooking();
+// await getCreatedBooking();
 

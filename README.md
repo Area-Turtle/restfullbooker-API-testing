@@ -18,7 +18,7 @@ API test automation project built using **Postman** and **Newman** to validate t
 * [Learning Objectives](#-learning-objectives)
 * [Project Highlights](#-project-highlights)
 * [Reference](#-reference)
-
+* [How to Start](#-setup)
 ---
 
 ## Overview
@@ -151,3 +151,7 @@ A free API playground created for learning and practicing API testing techniques
 
 https://restful-booker.herokuapp.com/
 
+## Setup
+Download/Clone Restfullbooker-API-testing from Github Repo to local Github repository
+
+To start on locally hosted URL (localhost:3000) use command: node server.js
