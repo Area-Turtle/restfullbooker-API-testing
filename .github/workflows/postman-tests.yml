@@ -9,20 +9,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Get repository code
       - name: Checkout repo
         uses: actions/checkout@v5
-
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: '24'
-
+      # 3. Install Newman
       - name: Install Newman
         run: npm install -g newman
-
+      # 4. Run Postman Collection
       - name: Run Postman Collection
         run: |
           newman run "postman/Restful-Booker-API_Testing.postman_collection.json" \
             -e "postman/Restful-Booker-Testing.postman_environment.json" \
             --reporters cli,junit \
             --reporter-junit-export results.xml
+      # Install server dependencies
+      - name: Install dependencies
+        run: |
+          npm install
+
+
+      # Start Node server
+      - name: Start Node server
+        run: |
+          node server.js &
+          echo $! > server.js
+
+
+      # Wait for server
+      - name: Wait for server
+        run: |
+          npx wait-on http://localhost:3000
