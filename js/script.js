@@ -1,6 +1,22 @@
-document.getElementById("btn").addEventListener("click", () => {
-    console.log("button is clicked loaded");
-    alert("Button clicked!");
+document.getElementById("checkStatus").addEventListener("click", async () => {
+    const statusResult = document.getElementById("statusResult");
+
+    try {
+        const response = await fetch("http://localhost:3000/api/ping");
+
+        const data = await response.text();
+
+        if (response.ok || response.status === 201) {
+            statusResult.textContent = `API Status: Online (${response.status}) - ${data}`;
+        } else {
+            statusResult.textContent = `API Error: ${response.status}`;
+        }
+
+    } catch (error) {
+        console.error(error);
+
+        statusResult.textContent = "API is unavailable";
+    }
 });
 
 

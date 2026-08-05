@@ -14,6 +14,23 @@ app.use(express.static(__dirname));
 app.use(express.json());
 
 // Proxy endpoint
+app.get("/api/ping", async (req, res) => {
+    try {
+        const response = await fetch("https://restful-booker.herokuapp.com/ping");
+
+        const data = await response.text();
+
+        res.status(response.status).send(data);
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            error: "Ping failed"
+        });
+    }
+});
+
 app.get("/api/booking/:id", async (req, res) => {
     try {
         const response = await fetch(
