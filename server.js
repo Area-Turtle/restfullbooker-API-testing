@@ -77,23 +77,23 @@ app.post("/api/auth", async (req, res) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(req.body)
+            body: JSON.stringify({
+                username: req.body.username,
+                password: req.body.password
+            })
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        const data = await response.json();
 
-        const auth = await response.json();
+        console.log(data);
 
-        res.json(auth);
+        res.status(response.status).json(data);
     } catch (error) {
         console.error(error);
-        res.status(500).json({
-            error: "Unable to authenticate."
-        });
+        res.status(500).json({ error: "Unable to authenticate." });
     }
 });
+
 // app.post("/api/auth", async (req, res) => {
 //     try {
 //         const response = await fetch(`${SERVER_API_URL}/auth`, {
