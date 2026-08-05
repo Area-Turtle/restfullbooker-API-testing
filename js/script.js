@@ -192,8 +192,12 @@ form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const username = document.getElementById("username").value.trim();
+    console.log(username)
     const password = document.getElementById("password").value;
-    console.log(req.body);
+    console.log(password)
+
+    // console.log(req.body);
+
     submitBtn.disabled = true;
     submitBtn.textContent = "Signing in…";
     messageEl.textContent = "";

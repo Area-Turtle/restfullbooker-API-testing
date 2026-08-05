@@ -72,6 +72,9 @@ app.post("/api/booking", async (req, res) => {
 });
 
 app.post("/api/auth", async (req, res) => {
+    console.log("Received JSON:");
+    console.log(req.body);
+
     try {
         const response = await fetch(`${SERVER_API_URL}/auth`, {
             method: "POST",
