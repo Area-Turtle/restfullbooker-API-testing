@@ -72,8 +72,8 @@ app.post("/api/booking", async (req, res) => {
 });
 
 app.post("/api/auth", async (req, res) => {
-    console.log("Received JSON:");
-    console.log(req.body);
+    // console.log("Received JSON:");
+    // console.log(req.body);
 
     try {
         const requestBody = {
@@ -81,8 +81,8 @@ app.post("/api/auth", async (req, res) => {
             password: req.body.password
         };
 
-        console.log("Sending to Restful Booker:");
-        console.log(JSON.stringify(requestBody, null, 2));
+        // console.log("Sending to Restful Booker:");
+        // console.log(JSON.stringify(requestBody, null, 2));
 
         const response = await fetch(`${SERVER_API_URL}/auth`, {
             method: "POST",
@@ -96,16 +96,16 @@ app.post("/api/auth", async (req, res) => {
 
         const data = await response.json();
 
-        console.log("Response from Restful Booker:");
-        console.log(data);
+        // console.log("Response from Restful Booker:");
+        // console.log(data);
 
         res.status(response.status).json(data);
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Unable to authenticate." });
     }
 });
-
 
 // app.post("/api/auth", async (req, res) => {
 //     console.log("Received JSON:");
