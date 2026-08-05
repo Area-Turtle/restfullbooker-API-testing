@@ -10,138 +10,137 @@
 
 <body>
 
-    <h1>Hello World!</h1>
-    <div class="booking-form">
-        <p>My localhost website is working.</p>
-
-        <button id="btn">Click Me</button>
-    </div>
-
     <h1>Restful Booker Demo</h1>
-    <div class="booking-form">
-        <label for="bookingId">Booking ID:</label>
-        <input type="number" id="bookingId" placeholder="Enter booking ID">
-
-
-        <button id="loadBookings">
-            Load Booking
-        </button>
-
-        <div id="bookingResult"></div>
-
-        <button id="allBookings">
-            Load All Booking List
-        </button>
-
-        <div id="allBookingResult"></div>
-    </div>
-    <div class="booking-form"></div>
-        <form id="login-form">
-            <h1>Sign in</h1>
-
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" autocomplete="username" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" autocomplete="current-password" required>
-
-            <button type="submit" id="submit-btn">Sign in</button>
-            <label> admin | password123 </label>
-            <div id="message" class="message"></div>
-
-        </form>
-    </div>
-
     <div class="booking-container">
+        <!-- Ping Server Connection -->
         <div class="booking-form">
-            <form id="createBookingForm">
-                <h1>Create Booking</h1>
+            <p>My localhost website is working.</p>
 
-                <label for="firstname">First Name</label><br>
-                <input type="text" id="firstname" name="firstname" value="John" required><br><br>
+            <button id="btn">Click Me</button>
+        </div>
+        <!-- Sign in Booking -->
+        <div class="booking-form">
+            <form id="login-form">
+                <h1>Sign in</h1>
 
-                <label for="lastname">Last Name</label><br>
-                <input type="text" id="lastname" name="lastname" value="Doe" required><br><br>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" autocomplete="username" required>
+                <br>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
 
-                <label for="totalprice">Total Price</label><br>
-                <input type="number" id="totalprice" name="totalprice" value="80085" required><br><br>
+                <button type="submit" id="submit-btn">Sign in</button>
+                <label> admin | password123 </label>
+                <div id="message" class="message"></div>
 
-                <label for="depositpaid">Deposit Paid</label><br>
-                <input type="checkbox" id="depositpaid" name="depositpaid" checked><br><br>
+            </form>
+        </div>
+        <!-- View Booking Entries -->
+        <div class="booking-form">
+            <label for="bookingId">Booking ID:</label>
+            <input type="number" id="bookingId" placeholder="Enter booking ID">
 
-                <label for="checkin">Check-in Date</label><br>
-                <input type="date" id="checkin" name="checkin" value="1990-01-01" required><br><br>
 
-                <label for="checkout">Check-out Date</label><br>
-                <input type="date" id="checkout" name="checkout" value="2026-01-01" required><br><br>
+            <button id="loadBookings">
+                Load Booking
+            </button>
 
-                <label for="additionalneeds">Additional Needs</label><br>
-                <input type="text" id="additionalneeds" name="additionalneeds" value="Breakfast, Lunch, Dinner"><br><br>
+            <div id="bookingResult"></div>
 
-                <button type="submit">Create Booking</button>
+            <button id="allBookings">
+                Load All Booking List
+            </button>
+
+            <div id="allBookingResult"></div>
+        </div>
+        <!-- Delete Booking entry -->
+        <div class="booking-form">
+            <form id="deleteBookingForm">
+                <h2>Delete Booking</h2>
+
+                <label for="deleteBookingId">Booking ID</label><br>
+                <input type="number" id="deleteBookingId" name="deleteBookingId" placeholder="Enter Booking ID"
+                    required>
+                <br><br>
+
+                <button type="submit">Delete Booking</button>
             </form>
 
-            <pre id="createBookingResult"></pre>
+            <pre id="deleteBookingResult"></pre>
         </div>
-        <div class="booking-form">
-            <form id="editBookingForm">
-                <h2>Edit Booking</h2>
+        <script src="js/script.js"></script>
+        <!-- <script src="js/booking.js"></script> -->
+</body>
+</div>
 
-                <label for="bookingid">Booking ID</label><br>
-                <input type="number" id="bookingid" name="bookingid" required><br><br>
-
-                <label for="editFirstname">First Name</label><br>
-                <input type="text" id="editFirstname" value="John" required><br><br>
-
-                <label for="editLastname">Last Name</label><br>
-                <input type="text" id="editLastname" value="Doe" required><br><br>
-
-                <label for="editTotalprice">Total Price</label><br>
-                <input type="number" id="editTotalprice" value="80085" required><br><br>
-
-                <label for="editDepositpaid">Deposit Paid</label><br>
-                <input type="checkbox" id="editDepositpaid" checked><br><br>
-
-                <label for="editCheckin">Check-in Date</label><br>
-                <input type="date" id="editCheckin" value="1990-01-01" required><br><br>
-
-                <label for="editCheckout">Check-out Date</label><br>
-                <input type="date" id="editCheckout" value="2026-01-01" required><br><br>
-
-                <label>Additional Needs</label><br>
-
-                <input type="checkbox" id="editBreakfast" name="editAdditionalneeds" value="Breakfast" checked>
-                <label for="editBreakfast">Breakfast</label><br>
-
-                <input type="checkbox" id="editLunch" name="editAdditionalneeds" value="Lunch" checked>
-                <label for="editLunch">Lunch</label><br>
-
-                <input type="checkbox" id="editDinner" name="editAdditionalneeds" value="Dinner" checked>
-                <label for="editDinner">Dinner</label><br><br>
-
-                <button type="submit">Update Booking</button>
-            </form>
-
-            <pre id="editBookingResult"></pre>
-        </div>
-
-    </div>
-
+<!-- Create | Edit Booking Entry -->
+<div class="booking-container">
+    <!-- Create Booking -->
     <div class="booking-form">
-        <form id="deleteBookingForm">
-            <h2>Delete Booking</h2>
+        <form id="createBookingForm">
+            <h1>Create Booking</h1>
 
-            <label for="deleteBookingId">Booking ID</label><br>
-            <input type="number" id="deleteBookingId" name="deleteBookingId" placeholder="Enter Booking ID" required>
-            <br><br>
+            <label for="firstname">First Name</label><br>
+            <input type="text" id="firstname" name="firstname" value="John" required><br><br>
 
-            <button type="submit">Delete Booking</button>
+            <label for="lastname">Last Name</label><br>
+            <input type="text" id="lastname" name="lastname" value="Doe" required><br><br>
+
+            <label for="totalprice">Total Price</label><br>
+            <input type="number" id="totalprice" name="totalprice" value="80085" required><br><br>
+
+            <label for="depositpaid">Deposit Paid</label><br>
+            <input type="checkbox" id="depositpaid" name="depositpaid" checked><br><br>
+
+            <label for="checkin">Check-in Date</label><br>
+            <input type="date" id="checkin" name="checkin" value="1990-01-01" required><br><br>
+
+            <label for="checkout">Check-out Date</label><br>
+            <input type="date" id="checkout" name="checkout" value="2026-01-01" required><br><br>
+
+            <label for="additionalneeds">Additional Needs</label><br>
+            <input type="text" id="additionalneeds" name="additionalneeds" value="Breakfast, Lunch, Dinner"><br><br>
+
+            <button type="submit">Create Booking</button>
         </form>
 
-        <pre id="deleteBookingResult"></pre>
+        <pre id="createBookingResult"></pre>
     </div>
-    <script src="js/script.js"></script>
-    <!-- <script src="js/booking.js"></script> -->
-</body>
+    <!-- Edit Booking -->
+    <div class="booking-form">
+        <form id="editBookingForm">
+            <h2>Edit Booking</h2>
+
+            <label for="bookingid">Booking ID</label><br>
+            <input type="number" id="bookingid" name="bookingid" required><br><br>
+
+            <label for="editFirstname">First Name</label><br>
+            <input type="text" id="editFirstname" value="John" required><br><br>
+
+            <label for="editLastname">Last Name</label><br>
+            <input type="text" id="editLastname" value="Doe" required><br><br>
+
+            <label for="editTotalprice">Total Price</label><br>
+            <input type="number" id="editTotalprice" value="80085" required><br><br>
+
+            <label for="editDepositpaid">Deposit Paid</label><br>
+            <input type="checkbox" id="editDepositpaid" checked><br><br>
+
+            <label for="editCheckin">Check-in Date</label><br>
+            <input type="date" id="editCheckin" value="1990-01-01" required><br><br>
+
+            <label for="editCheckout">Check-out Date</label><br>
+            <input type="date" id="editCheckout" value="2026-01-01" required><br><br>
+
+            <label for="additionalneeds">Additional Needs</label><br>
+            <input type="text" id="additionalneeds" name="additionalneeds" value="Breakfast, Lunch, Dinner"><br><br>
+
+            <button type="submit">Update Booking</button>
+        </form>
+
+        <pre id="editBookingResult"></pre>
+    </div>
+
+</div>
 
 </html>
