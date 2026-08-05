@@ -76,19 +76,27 @@ app.post("/api/auth", async (req, res) => {
     console.log(req.body);
 
     try {
+        const requestBody = {
+            username: req.body.username,
+            password: req.body.password
+        };
+
+        console.log("Sending to Restful Booker:");
+        console.log(JSON.stringify(requestBody, null, 2));
+
         const response = await fetch(`${SERVER_API_URL}/auth`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                username: req.body.username,
-                password: req.body.password
-            })
+            body: JSON.stringify(requestBody)
         });
+
+        console.log("Status:", response.status);
 
         const data = await response.json();
 
+        console.log("Response from Restful Booker:");
         console.log(data);
 
         res.status(response.status).json(data);
@@ -97,6 +105,34 @@ app.post("/api/auth", async (req, res) => {
         res.status(500).json({ error: "Unable to authenticate." });
     }
 });
+
+
+// app.post("/api/auth", async (req, res) => {
+//     console.log("Received JSON:");
+//     console.log(req.body);
+
+//     try {
+//         const response = await fetch(`${SERVER_API_URL}/auth`, {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 username: req.body.username,
+//                 password: req.body.password
+//             })
+//         });
+
+//         const data = await response.json();
+
+//         console.log(data);
+
+//         res.status(response.status).json(data);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: "Unable to authenticate." });
+//     }
+// });
 
 // app.post("/api/auth", async (req, res) => {
 //     try {
