@@ -27,6 +27,7 @@ jobs:
             -e "postman/Restful-Booker-Testing.postman_environment.json" \
             --reporters cli,junit \
             --reporter-junit-export results.xml
+
       # Install server dependencies
       - name: Install dependencies
         run: |
@@ -37,7 +38,7 @@ jobs:
       - name: Start Node server
         run: |
           node server.js &
-          echo $! > server.js
+          echo $! > server.pid
 
 
       # Wait for server
