@@ -11,6 +11,7 @@ console.log(SERVER_API_URL)
 
 // Serve your frontend files
 app.use(express.static(__dirname));
+app.use(express.json());
 
 // Proxy endpoint
 app.get("/api/booking/:id", async (req, res) => {
