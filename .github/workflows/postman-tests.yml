@@ -36,6 +36,8 @@ jobs:
 
       # Start Node server
       - name: Start Node server
+        env:
+          PORT: 3000
         run: |
           node server.js &
           echo $! > server.pid
