@@ -27,10 +27,10 @@
                 <h1>Sign in</h1>
 
                 <label for="username">Username</label><br>
-                <input type="text" id="username" name="username" autocomplete="username" required>
+                <input type="text" id="username" name="username" autocomplete="username" placeholder="Username" required>
                 <br>
                 <label for="password">Password</label><br>
-                <input type="password" id="password" name="password" autocomplete="current-password" required>
+                <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Password" required>
                 <br><br>
                 <button type="submit" id="submit-btn">Sign in</button>
                 <label> admin | password123 </label>
@@ -68,8 +68,7 @@
             <label for="deleteBookingId">Booking ID</label><br>
             <input type="number" id="deleteBookingId" name="deleteBookingId" placeholder="Enter Booking ID" required>
             <br><br>
-
-            <button type="submit">Delete Booking</button>
+            <button type="button" id="deleteBooking">Delete Booking</button>
         </form>
 
         <pre id="deleteBookingResult"></pre>
@@ -103,7 +102,7 @@
                 <label for="additionalneeds">Additional Needs</label><br>
                 <input type="text" id="additionalneeds" name="additionalneeds" value="Breakfast, Lunch, Dinner"><br><br>
 
-                <button type="submit">Create Booking</button>
+                <button type="button" id="createBooking">Create Booking</button>
             </form>
 
             <pre id="createBookingResult"></pre>
@@ -114,30 +113,30 @@
                 <h2>Edit Booking</h2>
 
                 <label for="bookingid">Booking ID</label><br>
-                <input type="number" id="bookingid" name="bookingid" required><br><br>
+                <input type="number" id="bookingid" name="bookingid" placeholder="Enter booking ID" required><br><br>
 
                 <label for="editFirstname">First Name</label><br>
-                <input type="text" id="editFirstname" value="John" required><br><br>
+                <input type="text" id="editFirstname" placeholder="Edit First Name" required><br><br>
 
                 <label for="editLastname">Last Name</label><br>
-                <input type="text" id="editLastname" value="Doe" required><br><br>
+                <input type="text" id="editLastname" placeholder="Edit Last Name" required><br><br>
 
                 <label for="editTotalprice">Total Price</label><br>
-                <input type="number" id="editTotalprice" value="80085" required><br><br>
+                <input type="number" id="editTotalprice" placeholder="Edit Price" required><br><br>
 
                 <label for="editDepositpaid">Deposit Paid</label><br>
-                <input type="checkbox" id="editDepositpaid" checked><br><br>
+                <input type="checkbox" id="editDepositpaid"><br><br>
 
                 <label for="editCheckin">Check-in Date</label><br>
-                <input type="date" id="editCheckin" value="1990-01-01" required><br><br>
+                <input type="date" id="editCheckin" placeholder="mm/dd/year" required><br><br>
 
                 <label for="editCheckout">Check-out Date</label><br>
-                <input type="date" id="editCheckout" value="2026-01-01" required><br><br>
+                <input type="date" id="editCheckout" placeholder="mm/dd/year" required><br><br>
 
-                <label for="additionalneeds">Additional Needs</label><br>
-                <input type="text" id="additionalneeds" name="additionalneeds" value="Breakfast, Lunch, Dinner"><br><br>
+                <label for="editAdditionalneeds">Additional Needs</label><br>
+                <input type="text" id="editAdditionalneeds" name="editAdditionalneeds" placeholder="Enter Additional Needs"><br><br>
 
-                <button type="submit">Update Booking</button>
+                <button type="button" id="editBooking">Update Booking</button>
             </form>
 
             <pre id="editBookingResult"></pre>
