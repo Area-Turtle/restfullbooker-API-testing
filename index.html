@@ -39,14 +39,11 @@
             </form>
         </div>
 
-
-        <!-- <script src="js/booking.js"></script> -->
-
     </div>
-
+    <br>
     <!-- View | Create Booking -->
     <div class="booking-container">
-    <!-- View Booking -->
+        <!-- View Booking -->
         <div class="booking-form">
         <h2>View Booking</h2>
         <label for="bookingId">Booking ID:</label><br>
@@ -61,7 +58,7 @@
 
         <div id="allBookingResult"></div>
         </div>
-    <!-- Create Booking -->
+        <!-- Create Booking -->
         <div class="booking-form">
             <form id="createBookingForm">
                 <h2>Create Booking</h2>
@@ -92,13 +89,17 @@
 
             <pre id="createBookingResult"></pre>
         </div>
-
+    </div>
+    <br>
     <!-- Edit | Delete Booking -->
-    <div class="booking-container">
+    <!-- <div class="booking-container"> -->
+    <div class="booking-container"id="loginContainer" style="display: none;">
 
         <!-- Edit Booking -->
         <div class="booking-form">
-            <form id="editBookingForm">
+        <!-- <div class="booking-form" id="editContainer" style="display: none;"> -->
+            <!-- <form id="editBookingForm"> -->
+            <form id="editBookingForm" style="display: none;">
                 <h2>Edit Booking</h2>
 
                 <label for="bookingid">Booking ID</label><br>
@@ -132,19 +133,20 @@
         </div>
         <!-- Delete Booking -->
         <div class="booking-form">
-        <form id="deleteBookingForm">
-            <h2>Delete Booking</h2>
+        <!-- <div class="booking-form" id="deleteContainer" style="display: none;"> -->
+            <!-- <form id="deleteBookingForm"> -->
+            <form id="deleteBookingForm" style="display: none;">
+                <h2>Delete Booking</h2>
 
-            <label for="deleteBookingId">Booking ID</label><br>
-            <input type="number" id="deleteBookingId" name="deleteBookingId" placeholder="Enter Booking ID" required>
-            <br><br>
-            <button type="button" id="deleteBooking">Delete Booking</button>
-        </form>
-
-        <pre id="deleteBookingResult"></pre>
+                <label for="deleteBookingId">Booking ID</label><br>
+                <input type="number" id="deleteBookingId" name="deleteBookingId" placeholder="Enter Booking ID" required>
+                <br><br>
+                <button type="button" id="deleteBooking">Delete Booking</button>
+            </form>
+            <pre id="deleteBookingResult"></pre>
         </div>
     </div>
-    </div>
+
     <script src="js/script.js"></script>
 </body>
 

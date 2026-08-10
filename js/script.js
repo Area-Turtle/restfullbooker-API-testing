@@ -89,24 +89,18 @@ async function createBooking() {
 }
 
 async function authenticate(username, password) {
-
-    const response = await fetch(
-        "http://localhost:3000/api/auth",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username,
-                password
-            })
-        }
-    );
-
+    const response = await fetch("http://localhost:3000/api/auth", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username,
+            password
+        })
+    });
 
     const data = await response.json();
-
 
     if (!response.ok || data.reason) {
 
@@ -120,6 +114,43 @@ async function authenticate(username, password) {
 
     return data;
 }
+// async function authenticate() {
+//     try {
+//         const response = await fetch("http://localhost:3000/api/auth", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 // username: document.getElementById("username").value,
+//                 // password: document.getElementById("password").value
+//                 username,
+//                 password
+//             })
+//         });
+
+//         const result = await response.json();
+
+//         if (response.ok) {
+//             document.getElementById("message").textContent =
+//                 "Signed in successfully";
+
+//             // Show Edit and Delete
+//             //document.getElementById("loginOnly").style.display = "block";
+//             document.getElementById("editBookingForm").style.display = "block";
+//             document.getElementById("deleteBookingForm").style.display = "block";
+//         } else {
+//             document.getElementById("message").textContent =
+//                 //"Sign in not successful"
+//                 JSON.stringify(result, null, 2);
+//         }
+
+//     } catch (error) {
+//         console.error(error);
+//         document.getElementById("message").textContent =
+//             "Unable to sign in.";
+//     }
+// }
 
 async function createBooking() {
     console.log("createBooking called");
@@ -351,6 +382,11 @@ form.addEventListener("submit", async (event) => {
                 "token",
                 data.token
             );
+            document.getElementById("loginContainer").style.display = "";
+            // document.getElementById("editContainer").style.display = "block";
+            // document.getElementById("deleteContainer").style.display = "block";
+            document.getElementById("editBookingForm").style.display = "";
+            document.getElementById("deleteBookingForm").style.display = "";
 
         } else {
 
