@@ -1,4 +1,4 @@
-name: Postman API Tests
+name: Restfull Booker API Tests
 
 on:
   push:
