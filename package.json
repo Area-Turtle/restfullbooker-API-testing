@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "API test automation project built using **Postman** and **Newman** to validate the functionality, reliability, and behavior of the Restful Booker API.",
   "main": "index.js",
-  
   "scripts": {
     "start": "node server.js",
-    "test": "npm run test:api && npm run test:ui",
+    "lint": "eslint .",
+    "test": "npm run test:unit && npm run test:api && npm run test:e2e",
+    "test:unit": "jest",
     "test:api": "newman run postman/Restful-Booker-API_Testing.postman_collection.json -e postman/Restful-Booker-Testing.postman_environment.json",
-    "test:ui": "cypress run"
+    "test:e2e": "playwright test"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,10 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "cypress": "^15.19.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
     "wait-on": "^9.0.0"
   }
 }
