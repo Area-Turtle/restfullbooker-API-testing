@@ -58,38 +58,38 @@ async function getAllBookings() {
     }
 }
 
-async function createBooking() {
-    const booking = {
-        firstname: "John",
-        lastname: "Doe",
-        totalprice: 150,
-        depositpaid: true,
-        bookingdates: {
-            checkin: "2026-07-01",
-            checkout: "2026-07-05"
-        },
-        additionalneeds: "Breakfast"
-    };
+// async function createBooking() {
+//     const booking = {
+//         firstname: "John",
+//         lastname: "Doe",
+//         totalprice: 150,
+//         depositpaid: true,
+//         bookingdates: {
+//             checkin: "2026-07-01",
+//             checkout: "2026-07-05"
+//         },
+//         additionalneeds: "Breakfast"
+//     };
 
-    const response = await fetch("http://localhost:3000/api/booking", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(booking)
-    });
+//     const response = await fetch("http://localhost:3000/api/booking", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(booking)
+//     });
 
-    const result = await response.json();
+//     const result = await response.json();
 
-    // Save the created booking ID
-    bookingId = result.bookingid;
+//     // Save the created booking ID
+//     bookingId = result.bookingid;
 
-    console.log("Created Booking ID:", bookingId);
-    console.log(result);
-}
+//     console.log("Created Booking ID:", bookingId);
+//     console.log(result);
+// }
 
 async function authenticate(username, password) {
-    const response = await fetch("http://localhost:3000/api/auth", {
+    const response = await fetch(`${BASE_URL}/auth`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -103,54 +103,50 @@ async function authenticate(username, password) {
     const data = await response.json();
 
     if (!response.ok || data.reason) {
-
         throw new Error(
-            data.reason ||
-            "Invalid username or password."
+            data.reason || "Invalid username or password."
         );
-
     }
-
 
     return data;
 }
-async function authenticate() {
-    try {
-        const response = await fetch("http://localhost:3000/api/auth", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // username: document.getElementById("username").value,
-                // password: document.getElementById("password").value
-                username,
-                password
-            })
-        });
+// async function authenticate() {
+//     try {
+//         const response = await fetch("http://localhost:3000/api/auth", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 // username: document.getElementById("username").value,
+//                 // password: document.getElementById("password").value
+//                 username,
+//                 password
+//             })
+//         });
 
-        const result = await response.json();
+//         const result = await response.json();
 
-        if (response.ok) {
-            document.getElementById("message").textContent =
-                "Signed in successfully";
+//         if (response.ok) {
+//             document.getElementById("message").textContent =
+//                 "Signed in successfully";
 
-            // Show Edit and Delete
-            //document.getElementById("loginOnly").style.display = "block";
-            document.getElementById("editBookingForm").style.display = "block";
-            document.getElementById("deleteBookingForm").style.display = "block";
-        } else {
-            document.getElementById("message").textContent =
-                //"Sign in not successful"
-                JSON.stringify(result, null, 2);
-        }
+//             // Show Edit and Delete
+//             //document.getElementById("loginOnly").style.display = "block";
+//             document.getElementById("editBookingForm").style.display = "block";
+//             document.getElementById("deleteBookingForm").style.display = "block";
+//         } else {
+//             document.getElementById("message").textContent =
+//                 //"Sign in not successful"
+//                 JSON.stringify(result, null, 2);
+//         }
 
-    } catch (error) {
-        console.error(error);
-        document.getElementById("message").textContent =
-            "Unable to sign in.";
-    }
-}
+//     } catch (error) {
+//         console.error(error);
+//         document.getElementById("message").textContent =
+//             "Unable to sign in.";
+//     }
+// }
 
 async function createBooking() {
     console.log("createBooking called");
