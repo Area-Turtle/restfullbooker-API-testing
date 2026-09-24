@@ -1,5 +1,5 @@
 # Restful Booker API Testing
-
+![Build Status](https://github.com/Area-Turtle/restfullbooker-API-testing/blob/main/.github/workflows/restfullbookerAPITest.yml/badge.svg)
 API test automation project built using **Postman** and **Newman** to validate the functionality, reliability, and behavior of the Restful Booker API.
 
 ---
