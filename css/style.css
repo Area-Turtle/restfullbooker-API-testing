@@ -34,6 +34,10 @@ button {
     width: auto;
 }
 
+.hidden {
+    display: none;
+}
+
 button {
     width: 100%;
     padding: 10px;

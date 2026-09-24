@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "API test automation project built using **Postman** and **Newman** to validate the functionality, reliability, and behavior of the Restful Booker API.",
   "main": "index.js",
+  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "npm run test:api && npm run test:ui",
+    "test:api": "newman run postman/Restful-Booker-API_Testing.postman_collection.json -e postman/Restful-Booker-Testing.postman_environment.json",
+    "test:ui": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "cypress": "^15.19.0"
+    "cypress": "^15.19.0",
+    "wait-on": "^9.0.0"
   }
 }

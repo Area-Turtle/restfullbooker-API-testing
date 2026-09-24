@@ -9,7 +9,6 @@ API test automation project built using **Postman** and **Newman** to validate t
 * [Overview](#-overview)
 * [Technologies Used](#️-technologies-used)
 * [API Endpoints Covered](#-api-endpoints-covered)
-
   * [Health Check](#️-health-check)
   * [Authentication](#-authentication)
   * [Booking Management](#-booking-management)
