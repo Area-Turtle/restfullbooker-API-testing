@@ -79,9 +79,7 @@ app.get("/api/booking/:id", async (req, res) => {
     const bookingId = req.params.id;
 
     if (!/^\d+$/.test(bookingId)) {
-        return res.status(400).json({
-            error: "Invalid booking ID"
-        });
+        return res.status(400).json({error: "Invalid booking ID"});
     }
     const id = Number(bookingId);
     // console.log("PUT booking ID:", req.params.id);
@@ -149,9 +147,7 @@ app.put("/api/booking/:id", async (req, res) => {
     const bookingId = req.params.id;
 
     if (!/^\d+$/.test(bookingId)) {
-        return res.status(400).json({
-            error: "Invalid booking ID"
-        });
+        return res.status(400).json({error: "Invalid booking ID"});
     }
     const id = Number(bookingId);
     // console.log("PUT booking ID:", req.params.id);
