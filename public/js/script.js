@@ -1,4 +1,3 @@
-
 console.log("script.js loaded");
 
 const form = document.getElementById("login-form");
@@ -19,14 +18,14 @@ async function getBooking(id) {
         console.log(booking);
 
         document.getElementById("bookingResult").textContent =
-            `Booking ${id}
-            First Name: ${booking.firstname}
-            Last Name: ${booking.lastname}
-            Total Price: $${booking.totalprice}
-            Deposit Paid: ${booking.depositpaid}
-            Check In: ${booking.bookingdates.checkin}
-            Check Out: ${booking.bookingdates.checkout}
-            Additional needs: ${booking.additionalneeds}`;
+            `Booking ${id}\n` +
+            `First Name: ${booking.firstname}\n` +
+            `Last Name: ${booking.lastname}\n` +
+            `Total Price: $${booking.totalprice}\n` +
+            `Deposit Paid: ${booking.depositpaid}\n` +
+            `Check In: ${booking.bookingdates.checkin}\n` +
+            `Check Out: ${booking.bookingdates.checkout}\n` +
+            `Additional Needs: ${booking.additionalneeds}`;
     } catch (error) {
         console.error(error);
         document.getElementById("bookingResult").textContent =
@@ -45,11 +44,13 @@ async function getAllBookings() {
         const bookings = await response.json();
 
         console.log(bookings);
-        document.getElementById("allBookings").innerHTML =
+
+        document.getElementById("allBookingResult").innerHTML =
             bookings.map(b => `<p>${b.bookingid}</p>`).join("");
     } catch (error) {
         console.error(error);
-        document.getElementById("allBookingListResult").textContent =
+
+        document.getElementById("allBookingResult").textContent =
             "Failed to load booking.";
     }
 }
@@ -252,6 +253,10 @@ document.getElementById("loadBookings").addEventListener("click", () => {
 document.getElementById("allBookings").addEventListener("click", () => {
     console.log("Button clicked");
     getAllBookings();
+});
+
+document.getElementById("closeAllBookings").addEventListener("click", () => {
+    document.getElementById("allBookingResult").innerHTML = "";
 });
 
 document.getElementById("createBookingForm").addEventListener("click", function (e) {

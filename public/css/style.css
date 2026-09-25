@@ -30,6 +30,10 @@ button {
     padding: 8px;
 }
 
+#bookingResult {
+    white-space: pre-line;
+}
+
 .booking-form input[type="checkbox"] {
     width: auto;
 }
