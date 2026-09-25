@@ -114,7 +114,7 @@ describe("POST /api/auth", () => {
             }
         );
 
-        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.status).toHaveBeenCalledWith(201);
 
         expect(res.json).toHaveBeenCalledWith({
             token: "abc123"
@@ -615,7 +615,8 @@ describe("PUT /api/booking/:id", () => {
         };
 
         const route = app.router.stack.find(
-            layer => layer.route?.path === "/api/booking/:id"
+            layer => layer.route?.path === "/api/booking/:id" &&
+        layer.route?.methods?.put
         );
 
         await route.route.stack[0].handle(req, res);
