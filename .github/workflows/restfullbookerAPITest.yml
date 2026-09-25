@@ -100,7 +100,7 @@ jobs:
 
       # 5. Wait for server
       - name: Wait for server
-        run: npx wait-on http://localhost:3000
+        run: npx wait-on http://localhost:3000/
 
       # 6. Check server health
       - name: Health check
