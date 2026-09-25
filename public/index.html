@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restful Booker Demo</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <h1>Restful Booker Demo</h1>
+    <!-- Ping | Sign in Booking -->
+    <div class="booking-container">
+        <!-- Ping Server Connection -->
+        <div class="booking-form">
+            <p>My localhost express server website is working.</p>
+
+            <button id="checkStatus">Check API Status</button>
+
+            <p id="statusResult"></p>
+        </div>
+        <!-- Sign in Booking -->
+        <div class="booking-form">
+            <form id="login-form">
+                <h1>Sign in</h1>
+
+                <label for="username">Username</label><br>
+                <input type="text" id="username" name="username" autocomplete="username" placeholder="Username" required>
+                <br>
+                <label for="password">Password</label><br>
+                <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Password" required>
+                <br><br>
+                <button type="submit" id="submit-btn">Sign in</button>
+                <label> admin | password123 </label>
+                <div id="message" class="message"></div>
+
+            </form>
+        </div>
+
+    </div>
+    <br>
+    <!-- View | Create Booking -->
+    <div class="booking-container">
+        <!-- View Booking -->
+        <div class="booking-form">
+        <h2>View Booking</h2>
+        <label for="bookingId">Booking ID:</label><br>
+        <input type="number" id="bookingId" placeholder="Enter booking ID">
+        <br><br>
+        <button id="loadBookings">Load Booking</button><br><br>
+        <div id="bookingResult"></div>
+
+        <button id="allBookings">
+            Load All Booking List
+        </button>
+
+        <div id="allBookingResult"></div>
+        </div>
+        <!-- Create Booking -->
+        <div class="booking-form">
+            <form id="createBookingForm">
+                <h2>Create Booking</h2>
+
+                <label for="firstname">First Name</label><br>
+                <input type="text" id="firstname" name="firstname" value="John" required><br><br>
+
+                <label for="lastname">Last Name</label><br>
+                <input type="text" id="lastname" name="lastname" value="Doe" required><br><br>
+
+                <label for="totalprice">Total Price</label><br>
+                <input type="number" id="totalprice" name="totalprice" value="80085" required><br><br>
+
+                <label for="depositpaid">Deposit Paid</label><br>
+                <input type="checkbox" id="depositpaid" name="depositpaid" checked><br><br>
+
+                <label for="checkin">Check-in Date</label><br>
+                <input type="date" id="checkin" name="checkin" value="1990-01-01" required><br><br>
+
+                <label for="checkout">Check-out Date</label><br>
+                <input type="date" id="checkout" name="checkout" value="2026-01-01" required><br><br>
+
+                <label for="additionalneeds">Additional Needs</label><br>
+                <input type="text" id="additionalneeds" name="additionalneeds" value="Breakfast, Lunch, Dinner"><br><br>
+
+                <button type="button" id="createBooking">Create Booking</button>
+            </form>
+
+            <pre id="createBookingResult"></pre>
+        </div>
+    </div>
+    <br>
+    <!-- Edit | Delete Booking -->
+    <!-- <div class="booking-container"> -->
+    <div class="booking-container"id="loginContainer" style="display: none;">
+
+        <!-- Edit Booking -->
+        <div class="booking-form">
+        <!-- <div class="booking-form" id="editContainer" style="display: none;"> -->
+            <!-- <form id="editBookingForm"> -->
+            <form id="editBookingForm" style="display: none;">
+                <h2>Edit Booking</h2>
+
+                <label for="bookingid">Booking ID</label><br>
+                <input type="number" id="bookingid" name="bookingid" placeholder="Enter booking ID" required><br><br>
+
+                <label for="editFirstname">First Name</label><br>
+                <input type="text" id="editFirstname" placeholder="Edit First Name" required><br><br>
+
+                <label for="editLastname">Last Name</label><br>
+                <input type="text" id="editLastname" placeholder="Edit Last Name" required><br><br>
+
+                <label for="editTotalprice">Total Price</label><br>
+                <input type="number" id="editTotalprice" placeholder="Edit Price" required><br><br>
+
+                <label for="editDepositpaid">Deposit Paid</label><br>
+                <input type="checkbox" id="editDepositpaid"><br><br>
+
+                <label for="editCheckin">Check-in Date</label><br>
+                <input type="date" id="editCheckin" placeholder="mm/dd/year" required><br><br>
+
+                <label for="editCheckout">Check-out Date</label><br>
+                <input type="date" id="editCheckout" placeholder="mm/dd/year" required><br><br>
+
+                <label for="editAdditionalneeds">Additional Needs</label><br>
+                <input type="text" id="editAdditionalneeds" name="editAdditionalneeds" placeholder="Enter Additional Needs"><br><br>
+
+                <button type="button" id="editBooking">Update Booking</button>
+            </form>
+
+            <pre id="editBookingResult"></pre>
+        </div>
+        <!-- Delete Booking -->
+        <div class="booking-form">
+        <!-- <div class="booking-form" id="deleteContainer" style="display: none;"> -->
+            <!-- <form id="deleteBookingForm"> -->
+            <form id="deleteBookingForm" style="display: none;">
+                <h2>Delete Booking</h2>
+
+                <label for="deleteBookingId">Booking ID</label><br>
+                <input type="number" id="deleteBookingId" name="deleteBookingId" placeholder="Enter Booking ID" required>
+                <br><br>
+                <button type="button" id="deleteBooking">Delete Booking</button>
+            </form>
+            <pre id="deleteBookingResult"></pre>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

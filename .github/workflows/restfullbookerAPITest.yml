@@ -8,7 +8,7 @@ on:
     branches: [main]
 
   workflow_dispatch:
-  
+
 permissions:
   contents: read
 
@@ -169,7 +169,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
 
       # 4. Start Node server
       - name: Start Node server
