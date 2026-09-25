@@ -10,7 +10,7 @@
     "test:unit": "jest",
     "test:api": "newman run postman/Restful-Booker-API_Testing.postman_collection.json -e postman/Restful-Booker-Testing.postman_environment.json",
     "test:e2e": "playwright test",
-    "security:audit": "npm audit --audit-level=critical"
+    "security:audit": "npm audit --audit-level=high"
   },
   "repository": {
     "type": "git",
