@@ -48,7 +48,7 @@ test('Login with invalid credentials', async ({ page }) => {
   await expect(page.locator('#message')).toContainText(
     /Bad credentials/i
   );
-})
+});
 
 test('Create booking', async ({ page }) => {
   await page.goto('/');
@@ -85,7 +85,7 @@ test('Create booking', async ({ page }) => {
 });
 
 test('View booking', async ({ page }) => {
-  const id = 7
+  const id = 7;
   await page.goto('/');
 
   await expect(page).toHaveTitle(/Restful Booker Demo/i);
