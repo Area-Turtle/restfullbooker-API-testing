@@ -81,7 +81,7 @@ app.get("/api/booking/:id", async (req, res) => {
         res.json(booking);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Unable to fetch booking." });
+        res.status(500).json({ error: "Booking Entry doesn't Exist" });
     }
 });
 

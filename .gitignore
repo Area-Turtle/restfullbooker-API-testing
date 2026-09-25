@@ -16,5 +16,7 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Test-results
+# Test-results ignore
 test-results/
+playwright-report/
+coverage/
