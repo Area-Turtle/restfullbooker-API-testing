@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 console.log(PORT)
 
 const SERVER_API_URL = process.env.SERVER_API_URL;
+const BASE_URL = process.env.BASE_URL;
 console.log(SERVER_API_URL)
 
 // Serve your frontend files
@@ -17,7 +18,7 @@ app.use(express.json());
 // express server ping
 app.get("/api/ping", async (req, res) => {
     try {
-        const response = await fetch("https://restful-booker.herokuapp.com/ping");
+        const response = await fetch(`${SERVER_API_URL}/ping`);
 
         const data = await response.text();
 
@@ -269,7 +270,6 @@ app.delete("/api/booking/:id", async (req, res) => {
             });
         } res.json({
             bookingid: req.params.id,
-            token: tokenData.token,
             response: data
         });
 
@@ -335,7 +335,7 @@ app.delete("/api/booking/:id", async (req, res) => {
 // Only start the server when running `node server.js`
 if (require.main === module) {
     app.listen(PORT, () => {
-        console.log(`Server running at http://localhost:${PORT}`);
+        console.log(`Server running at ${BASE_URL}:${PORT}`);
     });
 }
 

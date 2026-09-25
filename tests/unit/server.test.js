@@ -917,7 +917,6 @@ describe("DELETE /api/booking/:id", () => {
 
         expect(res.json).toHaveBeenCalledWith({
             bookingid: "1",
-            token: "abc123",
             response: deleteResponse
         });
     });
@@ -929,7 +928,6 @@ describe("DELETE /api/booking/:id", () => {
             // Auth request
             .mockResolvedValueOnce({
                 json: jest.fn().mockResolvedValue({
-                    token: "abc123"
                 })
             })
             // DELETE booking request
@@ -963,7 +961,6 @@ describe("DELETE /api/booking/:id", () => {
 
         expect(res.json).toHaveBeenCalledWith({
             bookingid: "1",
-            token: "abc123",
             response: deleteResponse
         });
     });
@@ -975,7 +972,6 @@ describe("DELETE /api/booking/:id", () => {
             // Auth request
             .mockResolvedValueOnce({
                 json: jest.fn().mockResolvedValue({
-                    token: "abc123"
                 })
             })
             // DELETE booking request

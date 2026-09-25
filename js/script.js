@@ -1,17 +1,16 @@
 
 console.log("script.js loaded");
-const BASE_URL = "http://localhost:3000/api";
+
+//const BASE_URL = `${process.env.BASE_URL}:${process.env.PORT}`;
 
 const form = document.getElementById("login-form");
 const submitBtn = document.getElementById("submit-btn");
 const messageEl = document.getElementById("message");
-let bookingId;
-let authToken;
 
 
 async function getBooking(id) {
     try {
-        const response = await fetch(`${BASE_URL}/booking/${id}`);
+        const response = await fetch(`/api/booking/${id}`);
 
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
@@ -40,7 +39,7 @@ async function getBooking(id) {
 
 async function getAllBookings() {
     try {
-        const response = await fetch(`${BASE_URL}/booking`);
+        const response = await fetch("/api/booking");
 
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
@@ -89,7 +88,7 @@ async function getAllBookings() {
 // }
 
 async function authenticate(username, password) {
-    const response = await fetch(`${BASE_URL}/auth`, {
+    const response = await fetch("/api/auth", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -163,7 +162,7 @@ async function createBooking() {
     };
 
     try {
-        const response = await fetch("http://localhost:3000/api/booking", {
+        const response = await fetch("/api/booking", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -190,7 +189,6 @@ async function createBooking() {
 }
 
 async function editBooking() {
-
     const bookingId = document.getElementById("bookingid").value;
     const firstname = document.getElementById("editFirstname").value.trim();
     const lastname = document.getElementById("editLastname").value.trim();
@@ -198,9 +196,9 @@ async function editBooking() {
     const depositpaid = document.getElementById("editDepositpaid").checked;
     const checkin = document.getElementById("editCheckin").value;
     const checkout = document.getElementById("editCheckout").value;
-    const additionalneeds = document.getElementById("editAdditionalneeds").value.trim();
+    const additionalneeds =
+        document.getElementById("editAdditionalneeds").value.trim();
 
-    // If any field is empty, use PATCH
     const usePatch =
         firstname === "" ||
         lastname === "" ||
@@ -212,12 +210,10 @@ async function editBooking() {
     let booking = {};
 
     if (usePatch) {
-
         if (firstname !== "") booking.firstname = firstname;
         if (lastname !== "") booking.lastname = lastname;
         if (totalprice !== "") booking.totalprice = Number(totalprice);
 
-        // Checkbox always has a value, so include it
         booking.depositpaid = depositpaid;
 
         const bookingdates = {};
@@ -232,10 +228,7 @@ async function editBooking() {
         if (additionalneeds !== "") {
             booking.additionalneeds = additionalneeds;
         }
-
     } else {
-
-        // Full booking for PUT
         booking = {
             firstname,
             lastname,
@@ -247,26 +240,38 @@ async function editBooking() {
             },
             additionalneeds
         };
-
     }
 
     const method = usePatch ? "PATCH" : "PUT";
-    const response = await fetch(
-        `http://localhost:3000/api/booking/${bookingId}`,
-        {
-            method,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(booking)
+
+    try {
+        const response = await fetch(
+            `/api/booking/${bookingId}`,
+            {
+                method,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(booking)
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                result.error || `HTTP ${response.status}`
+            );
         }
-    );
 
-    const result = await response.json();
+        document.getElementById("editBookingResult").textContent =
+            "Booking Updated";
+    } catch (error) {
+        console.error(error);
 
-    document.getElementById("editBookingResult").textContent =
-        // JSON.stringify(result, null, 2);
-        "Booking Updated"
+        document.getElementById("editBookingResult").textContent =
+            `Unable to update booking: ${error.message}`;
+    }
 }
 
 async function deleteBooking() {
@@ -275,7 +280,7 @@ async function deleteBooking() {
 
     try {
         const response = await fetch(
-            `http://localhost:3000/api/booking/${bookingId}`,
+            `/api/booking/${bookingId}`,
             {
                 method: "DELETE",
                 headers: {
@@ -285,7 +290,11 @@ async function deleteBooking() {
         );
 
         const result = await response.json();
-
+        if (!response.ok) {
+            throw new Error(
+                result.error || `HTTP ${response.status}`
+            );
+        }
         document.getElementById("deleteBookingResult").textContent =
             // JSON.stringify(result, null, 1),
             "Booking Deleted"
@@ -325,7 +334,7 @@ document.getElementById("checkStatus").addEventListener("click", async () => {
     const statusResult = document.getElementById("statusResult");
 
     try {
-        const response = await fetch("http://localhost:3000/api/ping");
+        const response = await fetch("/api/ping");
 
         const data = await response.text();
 
