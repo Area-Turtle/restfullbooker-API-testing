@@ -4,15 +4,19 @@ require("dotenv").config();
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-console.log(PORT)
+// console.log(PORT);
 
 const SERVER_API_URL = process.env.SERVER_API_URL;
 const BASE_URL = process.env.BASE_URL;
-console.log(SERVER_API_URL)
+// console.log(SERVER_API_URL);
 
 // Serve your frontend files
-app.use(express.static(__dirname));
+const path = require("path");
+
 app.use(express.json());
+
+// Serve only frontend files
+app.use(express.static(path.join(__dirname, "public")));
 
 // Proxy endpoint
 // express server ping
@@ -79,7 +83,7 @@ app.get("/api/booking/:id", async (req, res) => {
             error: "Invalid booking ID"
         });
     }
-    console.log("PUT booking ID:", req.params.id);
+    // console.log("PUT booking ID:", req.params.id);
     try {
         const response = await fetch(
             `${SERVER_API_URL}/booking/${req.params.id}`
@@ -140,7 +144,7 @@ app.post("/api/booking", async (req, res) => {
 });
 // express server booker edit booking given id
 app.put("/api/booking/:id", async (req, res) => {
-    console.log("PUT booking ID:", req.params.id);
+    // console.log("PUT booking ID:", req.params.id);
     const bookingId = req.params.id;
 
     if (!/^\d+$/.test(bookingId)) {
@@ -148,7 +152,7 @@ app.put("/api/booking/:id", async (req, res) => {
             error: "Invalid booking ID"
         });
     }
-    console.log("PUT booking ID:", req.params.id);
+    // console.log("PUT booking ID:", req.params.id);
     try {
         const tokenResponse = await fetch(`${SERVER_API_URL}/auth`, {
             method: "POST",
@@ -250,7 +254,7 @@ app.delete("/api/booking/:id", async (req, res) => {
             error: "Invalid booking ID"
         });
     }
-    console.log("PUT booking ID:", req.params.id);
+    // console.log("PUT booking ID:", req.params.id);
     try {
         const tokenResponse = await fetch(`${SERVER_API_URL}/auth`, {
             method: "POST",
