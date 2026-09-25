@@ -72,6 +72,14 @@ app.post("/api/auth", async (req, res) => {
 
 // express server booker get view id
 app.get("/api/booking/:id", async (req, res) => {
+    const bookingId = req.params.id;
+
+    if (!/^\d+$/.test(bookingId)) {
+        return res.status(400).json({
+            error: "Invalid booking ID"
+        });
+    }
+    console.log("PUT booking ID:", req.params.id);
     try {
         const response = await fetch(
             `${SERVER_API_URL}/booking/${req.params.id}`
@@ -132,6 +140,14 @@ app.post("/api/booking", async (req, res) => {
 });
 // express server booker edit booking given id
 app.put("/api/booking/:id", async (req, res) => {
+    console.log("PUT booking ID:", req.params.id);
+    const bookingId = req.params.id;
+
+    if (!/^\d+$/.test(bookingId)) {
+        return res.status(400).json({
+            error: "Invalid booking ID"
+        });
+    }
     console.log("PUT booking ID:", req.params.id);
     try {
         const tokenResponse = await fetch(`${SERVER_API_URL}/auth`, {
@@ -227,6 +243,13 @@ app.patch("/api/booking/:id", async (req, res) => {
 });
 
 app.delete("/api/booking/:id", async (req, res) => {
+    const bookingId = req.params.id;
+
+    if (!/^\d+$/.test(bookingId)) {
+        return res.status(400).json({
+            error: "Invalid booking ID"
+        });
+    }
     console.log("PUT booking ID:", req.params.id);
     try {
         const tokenResponse = await fetch(`${SERVER_API_URL}/auth`, {
