@@ -32,7 +32,7 @@ module.exports = defineConfig([
 
   // Browser JavaScript
   {
-    files: ["js/**/*.js"],
+    files: ["public/js/**/*.js"],
     languageOptions: {
       globals: {
         ...globals.browser
