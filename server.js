@@ -83,10 +83,11 @@ app.get("/api/booking/:id", async (req, res) => {
             error: "Invalid booking ID"
         });
     }
+    const id = Number(bookingId);
     // console.log("PUT booking ID:", req.params.id);
     try {
         const response = await fetch(
-            `${SERVER_API_URL}/booking/${req.params.id}`
+            `${SERVER_API_URL}/booking/${id}`
         );
 
         const booking = await response.json();
@@ -152,6 +153,7 @@ app.put("/api/booking/:id", async (req, res) => {
             error: "Invalid booking ID"
         });
     }
+    const id = Number(bookingId);
     // console.log("PUT booking ID:", req.params.id);
     try {
         const tokenResponse = await fetch(`${SERVER_API_URL}/auth`, {
@@ -168,7 +170,7 @@ app.put("/api/booking/:id", async (req, res) => {
         const tokenData = await tokenResponse.json();
 
         const response = await fetch(
-            `${SERVER_API_URL}/booking/${req.params.id}`,
+            `${SERVER_API_URL}/booking/${id}`,
             {
                 method: "PUT",
                 headers: {
@@ -196,6 +198,14 @@ app.put("/api/booking/:id", async (req, res) => {
 });
 
 app.patch("/api/booking/:id", async (req, res) => {
+    const bookingId = req.params.id;
+
+    if (!/^\d+$/.test(bookingId)) {
+        return res.status(400).json({
+            error: "Invalid booking ID"
+        });
+    }
+    const id = Number(bookingId);
     try {
         const authResponse = await fetch(`${SERVER_API_URL}/auth`, {
             method: "POST",
@@ -211,7 +221,7 @@ app.patch("/api/booking/:id", async (req, res) => {
         const authData = await authResponse.json();
 
         const response = await fetch(
-            `${SERVER_API_URL}/booking/${req.params.id}`,
+            `${SERVER_API_URL}/booking/${id}`,
             {
                 method: "PATCH",
                 headers: {
@@ -254,6 +264,7 @@ app.delete("/api/booking/:id", async (req, res) => {
             error: "Invalid booking ID"
         });
     }
+    const id = Number(bookingId);
     // console.log("PUT booking ID:", req.params.id);
     try {
         const tokenResponse = await fetch(`${SERVER_API_URL}/auth`, {
@@ -270,7 +281,7 @@ app.delete("/api/booking/:id", async (req, res) => {
         const tokenData = await tokenResponse.json();
 
         const response = await fetch(
-            `${SERVER_API_URL}/booking/${req.params.id}`,
+            `${SERVER_API_URL}/booking/${id}`,
             {
                 method: "DELETE",
                 headers: {
