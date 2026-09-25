@@ -391,7 +391,7 @@ describe("POST /api/booking", () => {
             }
         );
 
-        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.status).toHaveBeenCalledWith(201);
 
         expect(res.json).toHaveBeenCalledWith(booking);
     });
