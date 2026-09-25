@@ -33,7 +33,7 @@ describe("GET /api/ping", () => {
         await route.route.stack[0].handle(req, res);
 
         expect(fetch).toHaveBeenCalledWith(
-            "https://restful-booker.herokuapp.com/ping"
+            `${SERVER_API_URL}/ping`
         );
 
         expect(res.status).toHaveBeenCalledWith(201);
