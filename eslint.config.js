@@ -1,16 +1,26 @@
 const js = require("@eslint/js");
 const globals = require("globals");
+const security = require("eslint-plugin-security");
 const { defineConfig } = require("eslint/config");
 
 module.exports = defineConfig([
   js.configs.recommended,
 
+  {
+    plugins: {
+      security
+    },
+
+    rules: {
+      ...security.configs.recommended.rules
+    }
+  },
   // Node.js files
   {
     files: [
       "server.js",
       "eslint.config.js",
-      "jest.config.js",
+      "jest.config.js"
     ],
     languageOptions: {
       globals: {
