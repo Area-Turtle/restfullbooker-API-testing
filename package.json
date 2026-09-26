@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint .",
-    "test": "npm run test:unit -- --coverage && npm run test:api && npm run test:e2e && npm run security:audit",
-    "test:unit": "jest",
+    "test": "npm run test:unit && npm run test:api && npm run test:e2e && npm run security:audit",
+    "test:unit": "jest --coverage",
     "test:api": "newman run postman/Restful-Booker-API_Testing.postman_collection.json -e postman/Restful-Booker-Testing.postman_environment.json",
     "test:e2e": "playwright test",
     "security:audit": "npm audit --audit-level=high"
