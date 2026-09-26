@@ -315,12 +315,17 @@ app.delete("/api/booking/:id", async (req, res) => {
     }
 });
 
-// Only start the server when running `node server.js`
-if (require.main === module) {
+function startServer() {
     app.listen(PORT, () => {
         console.log(`Server running at ${BASE_URL}:${PORT}`);
     });
 }
 
-// Allow Jest to import the Express app
-module.exports = app;
+if (require.main === module) {
+    startServer();
+}
+
+module.exports = {
+    app,
+    startServer
+};

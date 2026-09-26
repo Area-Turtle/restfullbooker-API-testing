@@ -2,9 +2,38 @@
 // const app = express();
 // app.use(express.json());
 require("dotenv").config();
-const app = require("../../server");
 const SERVER_API_URL = process.env.SERVER_API_URL;
+const { app, startServer } = require("../../server");
 
+describe("Server", () => {
+
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
+    test("should start server and log server address", () => {
+
+        const listenMock = jest
+            .spyOn(app, "listen")
+            .mockImplementation((port, callback) => {
+                callback();
+                return {};
+            });
+
+        const consoleLogMock = jest
+            .spyOn(console, "log")
+            .mockImplementation();
+
+        startServer();
+
+        expect(listenMock).toHaveBeenCalled();
+
+        expect(consoleLogMock).toHaveBeenCalledWith(
+            expect.stringContaining("Server running at")
+        );
+    });
+
+});
 // Ping Unit Tests
 describe("GET /api/ping", () => {
     beforeEach(() => {
@@ -341,7 +370,7 @@ describe("GET /api/booking", () => {
 
 describe("POST /api/booking", () => {
     beforeEach(() => {
-        jest.spyOn(console, "error").mockImplementation(() => {});
+        jest.spyOn(console, "error").mockImplementation(() => { });
     });
 
     afterEach(() => {
@@ -396,7 +425,36 @@ describe("POST /api/booking", () => {
         expect(res.json).toHaveBeenCalledWith(booking);
     });
 
+    test("should return 400 for invalid booking ID", async () => {
+
+        const req = {
+            params: {
+                id: "abc"
+            }
+        };
+
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        const route = app.router.stack.find(
+            layer =>
+                layer.route?.path === "/api/booking/:id" &&
+                layer.route?.methods?.get
+        );
+
+        await route.route.stack[0].handle(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+
+        expect(res.json).toHaveBeenCalledWith({
+            error: "Invalid booking ID"
+        });
+    });
+
     test("should return API error status when creating booking fails", async () => {
+
         const errorResponse = {
             error: "Invalid booking data"
         };
@@ -425,6 +483,13 @@ describe("POST /api/booking", () => {
         );
 
         await route.route.stack[0].handle(req, res);
+
+        expect(global.fetch).toHaveBeenCalledWith(
+            expect.stringContaining("/booking"),
+            expect.objectContaining({
+                method: "POST"
+            })
+        );
 
         expect(res.status).toHaveBeenCalledWith(400);
 
@@ -616,7 +681,7 @@ describe("PUT /api/booking/:id", () => {
 
         const route = app.router.stack.find(
             layer => layer.route?.path === "/api/booking/:id" &&
-        layer.route?.methods?.put
+                layer.route?.methods?.put
         );
 
         await route.route.stack[0].handle(req, res);
@@ -627,11 +692,40 @@ describe("PUT /api/booking/:id", () => {
             error: "Booking Entry doesn't Exist"
         });
     });
+
+    test("should return 400 for invalid booking ID", async () => {
+
+        const req = {
+            params: {
+                id: "abc"
+            },
+            body: {}
+        };
+
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        const route = app.router.stack.find(
+            layer =>
+                layer.route?.path === "/api/booking/:id" &&
+                layer.route?.methods?.put
+        );
+
+        await route.route.stack[0].handle(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+
+        expect(res.json).toHaveBeenCalledWith({
+            error: "Invalid booking ID"
+        });
+    });
 });
 
 describe("PATCH /api/booking/:id", () => {
     beforeEach(() => {
-        jest.spyOn(console, "error").mockImplementation(() => {});
+        jest.spyOn(console, "error").mockImplementation(() => { });
     });
 
     afterEach(() => {
@@ -790,7 +884,7 @@ describe("PATCH /api/booking/:id", () => {
         };
 
         const route = app.router.stack.find(
-            layer => 
+            layer =>
                 layer.route?.path === "/api/booking/:id" &&
                 layer.route?.methods?.patch
         );
@@ -825,8 +919,8 @@ describe("PATCH /api/booking/:id", () => {
         };
 
         const route = app.router.stack.find(
-            layer => layer.route?.path === "/api/booking/:id" && 
-            layer.route?.methods?.patch
+            layer => layer.route?.path === "/api/booking/:id" &&
+                layer.route?.methods?.patch
         );
 
         await route.route.stack[0].handle(req, res);
@@ -837,12 +931,42 @@ describe("PATCH /api/booking/:id", () => {
             error: "Booking Entry doesn't Exist"
         });
     });
+
+    test("should return 400 for invalid booking ID", async () => {
+
+        const req = {
+            params: {
+                id: "abc"
+            },
+            body: {}
+        };
+
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn(),
+            send: jest.fn()
+        };
+
+        const route = app.router.stack.find(
+            layer =>
+                layer.route?.path === "/api/booking/:id" &&
+                layer.route?.methods?.patch
+        );
+
+        await route.route.stack[0].handle(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+
+        expect(res.json).toHaveBeenCalledWith({
+            error: "Invalid booking ID"
+        });
+    });
 });
 
 describe("DELETE /api/booking/:id", () => {
     beforeEach(() => {
-        jest.spyOn(console, "log").mockImplementation(() => {});
-        jest.spyOn(console, "error").mockImplementation(() => {});
+        jest.spyOn(console, "log").mockImplementation(() => { });
+        jest.spyOn(console, "error").mockImplementation(() => { });
     });
 
     afterEach(() => {
@@ -1039,6 +1163,34 @@ describe("DELETE /api/booking/:id", () => {
 
         expect(res.json).toHaveBeenCalledWith({
             error: "Booking Entry Doesn't Exist"
+        });
+    });
+
+    test("should return 400 for invalid booking ID", async () => {
+
+        const req = {
+            params: {
+                id: "abc"
+            }
+        };
+
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        const route = app.router.stack.find(
+            layer =>
+                layer.route?.path === "/api/booking/:id" &&
+                layer.route?.methods?.delete
+        );
+
+        await route.route.stack[0].handle(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+
+        expect(res.json).toHaveBeenCalledWith({
+            error: "Invalid booking ID"
         });
     });
 });
