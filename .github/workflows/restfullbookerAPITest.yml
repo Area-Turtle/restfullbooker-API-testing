@@ -2,10 +2,12 @@ name: Restfull Booker API Tests
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
   workflow_dispatch:
 
@@ -14,7 +16,7 @@ permissions:
 
 jobs:
 
-  # 1. Lint
+  # 1. LINT
   lint:
     name: ESLint
     runs-on: ubuntu-latest
@@ -23,11 +25,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v5
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: 24
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -35,7 +37,8 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-  # 2. Security
+
+  # 2. SECURITY
   security:
     name: Security Audit
     runs-on: ubuntu-latest
@@ -44,11 +47,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v5
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: 24
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -56,7 +59,8 @@ jobs:
       - name: Run npm audit
         run: npm audit --audit-level=critical
 
-  # 3. Jest Unit Tests
+
+  # 3. UNIT TESTS
   unit-tests:
     name: Jest Unit Tests
     runs-on: ubuntu-latest
@@ -65,11 +69,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v5
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: 24
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -77,28 +81,25 @@ jobs:
       - name: Run Jest
         run: npm run test:unit
 
-  # 4. Newman API Tests
-  run-postman-tests:
+
+  # 4. API TESTS
+  postman-tests:
     name: Newman API Tests
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Get repository code
       - name: Checkout repo
         uses: actions/checkout@v5
 
-      # 2. Setup Node.js
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: 24
+          cache: npm
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4. Start Node server
       - name: Start Node server
         env:
           PORT: 3000
@@ -109,7 +110,6 @@ jobs:
           echo $! > server.pid
           sleep 2
 
-      # 5. Check server process
       - name: Check server process
         run: |
           if ! kill -0 $(cat server.pid) 2>/dev/null; then
@@ -118,15 +118,12 @@ jobs:
             exit 1
           fi
 
-      # 6. Wait for server
       - name: Wait for server
         run: npx wait-on http://localhost:3000/api/ping --timeout 30000
 
-      # 7. Check server health
       - name: Health check
         run: curl --fail http://localhost:3000/api/ping
 
-      # 8. Run Postman Collection
       - name: Run Postman Collection
         run: |
           npx newman run "postman/Restful-Booker-API_Testing.postman_collection.json" \
@@ -134,23 +131,22 @@ jobs:
             --reporters cli,junit \
             --reporter-junit-export results.xml
 
-      # 9. Upload Newman results
-      - name: Upload Newman Results
+      - name: Upload Newman results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: newman-results
           path: results.xml
 
-      # 9. Upload server logs if something fails
       - name: Upload server logs
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: server-logs
+          name: newman-server-logs
           path: server.log
 
-  # 5. Playwright E2E Tests
+
+  # 5. E2E TESTS
   e2e-tests:
     name: Playwright E2E Tests
     runs-on: ubuntu-latest
@@ -159,11 +155,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v5
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: 24
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -171,7 +167,6 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      # 4. Start Node server
       - name: Start Node server
         env:
           PORT: 3000
@@ -182,7 +177,6 @@ jobs:
           echo $! > server.pid
           sleep 2
 
-      # 5. Check server process
       - name: Check server process
         run: |
           if ! kill -0 $(cat server.pid) 2>/dev/null; then
@@ -191,11 +185,9 @@ jobs:
             exit 1
           fi
 
-      # 6. Wait for server
       - name: Wait for server
         run: npx wait-on http://localhost:3000/api/ping --timeout 30000
 
-      # 7. Check server health
       - name: Health check
         run: curl --fail http://localhost:3000/api/ping
 
