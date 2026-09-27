@@ -221,8 +221,19 @@ jobs:
       - name: Build Docker image
         run: docker build -t restfullbooker-api:latest .
 
-      - name: Test Docker image
-        run: docker run -d --name restfullbooker-api -p 3000:3000 restfullbooker-api:latest
+      - name: Run Docker container
+        run: |
+          docker run -d \
+          --name restfullbooker-api \
+          -p 3000:3000 \
+          -e PORT=3000 \
+          -e BASE_URL=http://localhost \
+          -e SERVER_API_URL=https://restful-booker.herokuapp.com \
+          restfullbooker-api:latest
+      - name: Check Docker container
+        run: |
+          docker ps -a
+          docker logs restfullbooker-api
 
       - name: Wait for container
         run: npx wait-on http://localhost:3000/api/ping --timeout 30000
