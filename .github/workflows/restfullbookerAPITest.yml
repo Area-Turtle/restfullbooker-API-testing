@@ -63,7 +63,7 @@ jobs:
   unit-tests:
     name: Jest Unit Tests
     runs-on: ubuntu-latest
-    needs: lint, security
+    needs: [lint, security]
 
     steps:
       - name: Checkout repo
@@ -85,7 +85,7 @@ jobs:
   postman-tests:
     name: Newman API Tests
     runs-on: ubuntu-latest
-    needs: lint, security
+    needs: [lint, security]
 
     steps:
       - name: Checkout repo
@@ -149,7 +149,7 @@ jobs:
   e2e-tests:
     name: Playwright E2E Tests
     runs-on: ubuntu-latest
-    needs: lint, security
+    needs: [lint, security]
 
     steps:
       - name: Checkout repo
