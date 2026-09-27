@@ -207,3 +207,29 @@ jobs:
         with:
           name: playwright-server-logs
           path: server.log
+
+  # 6. DOCKER
+  docker:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: [lint, security, unit-tests, postman-tests, e2e-tests]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Build Docker image
+        run: docker build -t restfullbooker-api:latest .
+
+      - name: Test Docker image
+        run: docker run -d --name restfullbooker-api -p 3000:3000 restfullbooker-api:latest
+
+      - name: Wait for container
+        run: npx wait-on http://localhost:3000/api/ping --timeout 30000
+
+      - name: Health check
+        run: curl --fail http://localhost:3000/api/ping
+
+      - name: Stop Docker container
+        if: always()
+        run: docker stop restfullbooker-api
